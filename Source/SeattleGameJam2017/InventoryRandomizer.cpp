@@ -20,6 +20,8 @@ TArray<UInventoryItem*> UInventoryRandomizer::GetAllInventoryItems()
 
 void UInventoryRandomizer::CreateInventoryItems()
 {
+	UE_LOG(LogTemp, Warning, TEXT("Created Inventory Items, should only happen once!"));
+
 	auto IIBoxOfRocks = NewObject<UInventoryItem>();
 	IIBoxOfRocks->Initialize("Box of Rocks", 3, 3, .03);
 	InventoryItems.Add(IIBoxOfRocks);

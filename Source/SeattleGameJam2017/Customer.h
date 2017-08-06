@@ -21,6 +21,8 @@ enum class ECustomerType : uint8
 	Mutant
 };
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FCustomerDelegate);
+
 /**
  * 
  */
@@ -31,10 +33,15 @@ class SEATTLEGAMEJAM2017_API UCustomer : public UDataAsset
 
 public:
 
+	FCustomerDelegate OnCustomerLeaving;
+
+	UFUNCTION(BlueprintImplementableEvent, Category = "Inventory")
+	void ProcessCustomerLeaving();
+
 	void Initialize();
 
 	UFUNCTION(BlueprintCallable, Category = "Customer")
-	void ProcessConTactic(EConTactic UsedConTactic);
+	bool ProcessConTactic(EConTactic UsedConTactic);
 
 	UFUNCTION(BlueprintCallable, Category = "Customer")
 	EConTactic GetPreferredConTactic();

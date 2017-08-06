@@ -32,12 +32,23 @@ void UCustomer::Initialize()
 			break;
 	}
 
-	SetCustomerAngerRating(.03);
+	SetCustomerAngerRating(1);
 }
 
-void UCustomer::ProcessConTactic(EConTactic UsedConTactic) 
+bool UCustomer::ProcessConTactic(EConTactic UsedConTactic) 
 {
-
+	bool CustomerLeaving = false;
+	if (UsedConTactic == PreferredConTactic)
+	{
+		SetCustomerAngerRating(.5);
+		auto LeaveRoll = FMath::RandRange(0.f, 1.f);
+		UE_LOG(LogTemp, Warning, TEXT("LeaveRoll (compared to .333): %f"), LeaveRoll);
+		CustomerLeaving = LeaveRoll < .333;
+	} else if (UsedConTactic == HatedConTactic)
+	{
+		SetCustomerAngerRating(2);
+	}
+	return CustomerLeaving;
 }
 
 EConTactic UCustomer::GetPreferredConTactic() 

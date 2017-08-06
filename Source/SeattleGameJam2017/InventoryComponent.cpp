@@ -12,6 +12,8 @@ UInventoryComponent::UInventoryComponent()
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = false;
 
+	UE_LOG(LogTemp, Warning, TEXT("Created Inventory Component."));
+
 	Randomizer = NewObject<UInventoryRandomizer>();
 	if ( !ensure(Randomizer) ) { return; }
 	Randomizer->CreateInventoryItems();
@@ -42,6 +44,7 @@ int32 UInventoryComponent::SellItem(UInventoryItem* ItemToSell)
 {
 	if (!ensure(ItemToSell)) { return 0; }
 	auto CurrentPrice = ItemToSell->GetCurrentPrice();
+	UE_LOG(LogTemp, Warning, TEXT("Inventory items size is:%i"), Items.Num());
 	//Items.Remove(ItemToSell);
 	return CurrentPrice;
 }

@@ -19,18 +19,32 @@ class SEATTLEGAMEJAM2017_API AMyPlayerState : public APlayerState
 	GENERATED_BODY()
 
 public:
-
-	AMyPlayerState();
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	void Initialize();
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	UInventoryComponent* GetInventoryComponent() const;
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
-	void SellItem(UInventoryItem* ItemToSell);
+	void SellItem(UInventoryItem* ItemToSell, float AngerMultiplier);
+
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	void Retire();
+
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	void Reset();
+
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	void LoseMoney(int32 MoneyLost);
 
 	FMyPlayerStateDelegate OnPlayerDeath;
 
 	FMyPlayerStateDelegate OnPlayerLoseMoney;
+
+	FMyPlayerStateDelegate OnPlayerRetire;
+
+	UFUNCTION(BlueprintImplementableEvent, Category = "Inventory")
+	void ProcessPlayerRetire();
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "Inventory")
 	void ProcessPlayerDeath();
@@ -38,13 +52,14 @@ public:
 protected:
 
 	UPROPERTY(BlueprintReadOnly, Category = "Inventory")
+	bool IsPlayerDeadOrRetired = false;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Inventory")
 	int32 CurrentMoney = 0;
 
 	UPROPERTY(BlueprintReadOnly, Category = "Inventory")
-	float CurrentDeathChance = 1.f;
+	float CurrentDeathChance = 0.f;
 
-private:
-
+	UPROPERTY(BlueprintReadOnly, Category = "Inventory")
 	UInventoryComponent* InventoryComponent = nullptr;
-	
 };
