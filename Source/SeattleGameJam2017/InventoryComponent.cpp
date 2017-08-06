@@ -23,6 +23,16 @@ UInventoryComponent::UInventoryComponent()
 }
 
 
+int32 UInventoryComponent::GetSelectedInventoryItem()
+{
+	return SelectedInventoryItem;
+}
+
+void UInventoryComponent::SetSelectedInventoryItem(int32 NewSelectedInventoryItem)
+{
+	SelectedInventoryItem = NewSelectedInventoryItem;
+}
+
 TArray<UInventoryItem*> UInventoryComponent::GetItems() const
 {
 	return Items;
@@ -32,7 +42,7 @@ int32 UInventoryComponent::SellItem(UInventoryItem* ItemToSell)
 {
 	if (!ensure(ItemToSell)) { return 0; }
 	auto CurrentPrice = ItemToSell->GetCurrentPrice();
-	Items.Remove(ItemToSell);
+	//Items.Remove(ItemToSell);
 	return CurrentPrice;
 }
 

@@ -22,6 +22,12 @@ public:
 
 	int32 SellItem(UInventoryItem* ItemToSell);
 
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	int32 GetSelectedInventoryItem();
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	void SetSelectedInventoryItem(int32 NewSelectedInventoryItem);
+	int32 SelectedInventoryItem = 4;
+
 private:
 	UPROPERTY(EditDefaultsOnly, Category = "Inventory")
 	int32 DefaultInventorySize = 3;
