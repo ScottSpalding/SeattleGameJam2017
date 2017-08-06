@@ -43,6 +43,18 @@ public:
 	EConTactic PreferredConTactic;
 
 	UFUNCTION(BlueprintCallable, Category = "Customer")
+	EConTactic GetHatedConTactic();
+	UFUNCTION(BlueprintCallable, Category = "Customer")
+	void SetHatedConTactic(EConTactic NewHatedConTactic);
+	EConTactic HatedConTactic;
+
+	UFUNCTION(BlueprintCallable, Category = "Customer")
+	ECustomerType GetCustomerType();
+	UFUNCTION(BlueprintCallable, Category = "Customer")
+	void SetCustomerType(ECustomerType NewCustomerType);
+	ECustomerType CustomerType;
+
+	UFUNCTION(BlueprintCallable, Category = "Customer")
 	int32 GetCustomerNumber();
 	UFUNCTION(BlueprintCallable, Category = "Customer")
 	void SetCustomerNumber(int32 NewCustomerNumber);

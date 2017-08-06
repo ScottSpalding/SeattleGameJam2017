@@ -8,7 +8,6 @@ AMyPlayerState::AMyPlayerState()
 {
 	InventoryComponent = NewObject<UInventoryComponent>();
 
-	//PossessedTank->OnTankDeath.AddUniqueDynamic(this, &ATankAIController::ProcessPossessedTankDeath);
 	OnPlayerDeath.AddUniqueDynamic(this, &AMyPlayerState::ProcessPlayerDeath);
 }
 
@@ -36,8 +35,3 @@ void AMyPlayerState::SellItem(UInventoryItem* ItemToSell)
 
 	UE_LOG(LogTemp, Warning, TEXT("Player sold item."));
 }
-
-//void AMyPlayerState::ProcessPlayerDeath() 
-//{
-//	UE_LOG(LogTemp, Warning, TEXT("Caught player death event."));
-//}
