@@ -14,15 +14,25 @@ UInventoryComponent::UInventoryComponent()
 
 	Randomizer = NewObject<UInventoryRandomizer>();
 	if ( !ensure(Randomizer) ) { return; }
+	Randomizer->CreateInventoryItems();
 
-	for (int32 index = 0; index < DefaultInventorySize; index++) {
+	/*for (int32 index = 0; index < DefaultInventorySize; index++) {
 		Items.Add(Randomizer->GetNewItem());
-	}
+	}*/
+	Items = Randomizer->GetAllInventoryItems();
 }
 
 
 TArray<UInventoryItem*> UInventoryComponent::GetItems() const
 {
 	return Items;
+}
+
+int32 UInventoryComponent::SellItem(UInventoryItem* ItemToSell)
+{
+	if (!ensure(ItemToSell)) { return 0; }
+	auto CurrentPrice = ItemToSell->GetCurrentPrice();
+	Items.Remove(ItemToSell);
+	return CurrentPrice;
 }
 

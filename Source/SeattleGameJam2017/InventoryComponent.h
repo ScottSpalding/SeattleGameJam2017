@@ -17,11 +17,13 @@ class SEATTLEGAMEJAM2017_API UInventoryComponent : public UActorComponent
 public:
 	UInventoryComponent();
 
-	UFUNCTION(BlueprintCallable, Category = "inventory")
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	TArray<UInventoryItem*> GetItems() const;
 
+	int32 SellItem(UInventoryItem* ItemToSell);
+
 private:
-	UPROPERTY(EditDefaultsOnly, Category = "Setup")
+	UPROPERTY(EditDefaultsOnly, Category = "Inventory")
 	int32 DefaultInventorySize = 3;
 
 	UInventoryRandomizer* Randomizer = nullptr;

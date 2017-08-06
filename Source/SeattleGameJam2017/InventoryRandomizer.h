@@ -18,5 +18,11 @@ class SEATTLEGAMEJAM2017_API UInventoryRandomizer : public UFactory
 	
 public:	
 	UInventoryItem* GetNewItem();
-	
+
+	TArray<UInventoryItem*> GetAllInventoryItems();
+
+	void CreateInventoryItems();
+
+private:
+	TArray<UInventoryItem*> InventoryItems;
 };
