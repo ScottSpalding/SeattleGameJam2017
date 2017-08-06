@@ -62,6 +62,7 @@ void AMyPlayerState::Reset()
 	UE_LOG(LogTemp, Warning, TEXT("Reset called."));
 	CurrentDeathChance = 0.0;
 	CurrentMoney = 0;
+	IsPlayerDeadOrRetired = false;
 }
 
 void AMyPlayerState::LoseMoney(int32 MoneyLost)
