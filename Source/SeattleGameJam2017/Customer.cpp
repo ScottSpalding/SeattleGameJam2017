@@ -15,7 +15,8 @@ void UCustomer::Initialize()
 			break;
 	}
 
-	auto PreferredConType = FMath::RandRange(0, 2);
+	int32 PreferredConType = FMath::RandRange(0, 2);
+	UE_LOG(LogTemp, Warning, TEXT("Preferred Con Type Roll: %i"), PreferredConType);
 	switch (RandomCustomerType)
 	{
 		case (0):
@@ -33,6 +34,9 @@ void UCustomer::Initialize()
 	}
 
 	SetCustomerAngerRating(1);
+	SetCustomerUpsoldRating(1);
+	SetIsAngryFromLastRound(false);
+	SetIsUpsoldFromLastRound(false);
 }
 
 bool UCustomer::ProcessConTactic(EConTactic UsedConTactic) 
@@ -40,13 +44,21 @@ bool UCustomer::ProcessConTactic(EConTactic UsedConTactic)
 	bool CustomerLeaving = false;
 	if (UsedConTactic == PreferredConTactic)
 	{
-		SetCustomerAngerRating(.5);
+		SetCustomerAngerRating(GetCustomerAngerRating() - .33);
+		SetCustomerUpsoldRating(GetCustomerUpsoldRating() + 1);
+		UE_LOG(LogTemp, Warning, TEXT("Upsold!"));
+		UE_LOG(LogTemp, Warning, TEXT("GetCustomerUpsoldRating: %f"), GetCustomerUpsoldRating());
+		SetIsAngryFromLastRound(false);
+		SetIsUpsoldFromLastRound(true);
+	} else if (UsedConTactic == HatedConTactic)
+	{
+		SetCustomerAngerRating(GetCustomerAngerRating() + 1);
+		SetCustomerUpsoldRating(GetCustomerUpsoldRating() - .33);
 		auto LeaveRoll = FMath::RandRange(0.f, 1.f);
 		UE_LOG(LogTemp, Warning, TEXT("LeaveRoll (compared to .333): %f"), LeaveRoll);
 		CustomerLeaving = LeaveRoll < .333;
-	} else if (UsedConTactic == HatedConTactic)
-	{
-		SetCustomerAngerRating(2);
+		SetIsAngryFromLastRound(true);
+		SetIsUpsoldFromLastRound(false);
 	}
 	return CustomerLeaving;
 }
@@ -99,4 +111,34 @@ float UCustomer::GetCustomerAngerRating()
 void UCustomer::SetCustomerAngerRating(float NewCustomerAngerRating)
 {
 	CustomerAngerRating = NewCustomerAngerRating;
+}
+
+float UCustomer::GetCustomerUpsoldRating()
+{
+	return CustomerUpsoldRating;
+}
+
+void UCustomer::SetCustomerUpsoldRating(float NewCustomerUpsoldRating)
+{
+	CustomerUpsoldRating = NewCustomerUpsoldRating;
+}
+
+bool UCustomer::GetIsAngryFromLastRound()
+{
+	return IsAngryFromLastRound;
+}
+
+void UCustomer::SetIsAngryFromLastRound(bool NewIsAngryFromLastRound)
+{
+	IsAngryFromLastRound = NewIsAngryFromLastRound;
+}
+
+bool UCustomer::GetIsUpsoldFromLastRound()
+{
+	return IsUpsoldFromLastRound;
+}
+
+void UCustomer::SetIsUpsoldFromLastRound(bool NewIsUpsoldFromLastRound)
+{
+	IsUpsoldFromLastRound = NewIsUpsoldFromLastRound;
 }

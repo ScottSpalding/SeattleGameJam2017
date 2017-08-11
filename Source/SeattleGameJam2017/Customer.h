@@ -6,7 +6,7 @@
 #include "Engine/DataAsset.h"
 #include "Customer.generated.h"
 
-UENUM()
+UENUM(BlueprintType)
 enum class EConTactic : uint8
 {
 	SweetTalk,
@@ -14,7 +14,7 @@ enum class EConTactic : uint8
 	Upsell
 };
 
-UENUM()
+UENUM(BlueprintType)
 enum class ECustomerType : uint8
 {
 	Raider,
@@ -72,4 +72,22 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Customer")
 	void SetCustomerAngerRating(float NewCustomerAngerRating);
 	float CustomerAngerRating;
+
+	UFUNCTION(BlueprintCallable, Category = "Customer")
+	float GetCustomerUpsoldRating();
+	UFUNCTION(BlueprintCallable, Category = "Customer")
+	void SetCustomerUpsoldRating(float NewCustomerUpsoldRating);
+	float CustomerUpsoldRating;
+
+	UFUNCTION(BlueprintCallable, Category = "Customer")
+	bool GetIsAngryFromLastRound();
+	UFUNCTION(BlueprintCallable, Category = "Customer")
+	void SetIsAngryFromLastRound(bool NewIsAngryFromLastRound);
+	bool IsAngryFromLastRound;
+
+	UFUNCTION(BlueprintCallable, Category = "Customer")
+	bool GetIsUpsoldFromLastRound();
+	UFUNCTION(BlueprintCallable, Category = "Customer")
+	void SetIsUpsoldFromLastRound(bool NewIsUpsoldFromLastRound);
+	bool IsUpsoldFromLastRound;
 };

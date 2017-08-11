@@ -23,7 +23,7 @@ UInventoryComponent* AMyPlayerState::GetInventoryComponent() const
 	return InventoryComponent;
 }
 
-void AMyPlayerState::SellItem(UInventoryItem* ItemToSell, float AngerMultiplier)
+void AMyPlayerState::SellItem(UInventoryItem* ItemToSell, float AngerMultiplier, float CustomerUpsoldRating)
 {
 	if (!ensure(InventoryComponent) || !ensure(ItemToSell)) { return; }
 
@@ -35,7 +35,8 @@ void AMyPlayerState::SellItem(UInventoryItem* ItemToSell, float AngerMultiplier)
 	CurrentDeathChance += AddedDeathChance;
 	UE_LOG(LogTemp, Warning, TEXT("Current Death Chance: %f"), CurrentDeathChance);
 
-	CurrentMoney += InventoryComponent->SellItem(ItemToSell);
+	UE_LOG(LogTemp, Warning, TEXT("CustomerUpsoldRating: %f"), CustomerUpsoldRating);
+	CurrentMoney += InventoryComponent->SellItem(ItemToSell) * CustomerUpsoldRating;
 	UE_LOG(LogTemp, Warning, TEXT("Current Money: %f"), CurrentMoney);
 	
 	auto DeathRoll = FMath::RandRange(0.f, 1.f);

@@ -26,7 +26,7 @@ public:
 	UInventoryComponent* GetInventoryComponent() const;
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
-	void SellItem(UInventoryItem* ItemToSell, float AngerMultiplier);
+	void SellItem(UInventoryItem* ItemToSell, float AngerMultiplier, float CustomerUpsoldRating);
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	void Retire();

@@ -13,6 +13,7 @@ void URoundWidget::GetNewCustomer()
 {
 	auto NewCustomer = NewObject<UCustomer>();
 	NewCustomer->Initialize();
+	NewCustomer->AddToRoot();
 	Customer = NewCustomer;
 	Customers.Add(NewCustomer);
 }
